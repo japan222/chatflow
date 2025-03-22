@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+
+        <div class="button-group1">
+            <button onclick="sendKeyword('สวัสดี')">สวัสดี</button>
+            <button onclick="sendKeyword('กรอกข้อมูล')">กรอกข้อมูล</button>
+            <button onclick="sendKeyword('ขอสลิป')">ขอสลิป</button>
+            <button onclick="sendKeyword('ขอโทษ(ลูกค้าด่า)')">ขอโทษ<br>(ลูกค้าด่า)</button>
+        </div>
+        <div class="button-group2">  
+            <button onclick="sendKeyword('ตรวจสอบ')">ตรวจสอบ<br>1-2 นาที</button>
+            <button onclick="sendKeyword('รอ15')">รอ 15 นาที</button>
+            <button onclick="sendKeyword('เติมเงินเรียบร้อย')">เติมเงินเรียบร้อย</button>
+            <button onclick="sendKeyword('ถอนเงินเรียบร้อย')">ถอนเงินเรียบร้อย</button>
+        </div>
+        <div class="button-group3">  
+            <button onclick="sendKeyword('แนะนำเกม')">แนะนำเกมสล็อต</button>
+            <button onclick="sendKeyword('โบนัสไทม์')">โบนัสไทม์</button>
+            <button onclick="sendKeyword('คำอวยพร')">อวยพร<br>(ปิดการสนทนา)</button>
+            <button onclick="sendKeyword('ขอบคุณ')">ขอบคุณที่ใช้บริการ</button>
+        </div>
+
+        <div id="response" class="response">
+            <!-- ข้อความสุ่มจะถูกเพิ่มที่นี่ -->
+        </div>
+    </div>
+
+    <script>
+async function sendKeyword(keyword) {
+    const responseDiv = document.getElementById('response');
+    responseDiv.innerHTML = "กำลังสุ่มข้อความ...";
+
+    try {
+        const response = await fetch('/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ keyword })
+        });
+
+        if (!response.ok) throw new Error("Request failed");
+
+        const data = await response.json();
+
+        if (data.responses && data.responses.length > 0) {
+            responseDiv.innerHTML = data.responses.map((msg, index) => `
+            <div id="response" class="response">
+                <div class="response-item" onclick="copyText(this)">
+                    <span>${msg}</span>
+                    <div>
+                        <small id="copy-message-${index}" class="copy-message hidden">คัดลอกแล้ว!</small>
+                    </div>
+                </div>
+            `).join("");
+        } else {
+            throw new Error("ไม่มีข้อความที่ถูกสร้าง");
+        }
+    } catch (error) {
+        responseDiv.innerHTML = `<span style="color:red;">Error: ${error.message}</span>`;
+    }
+}
+
+function copyText(element) {
+    const textElement = element.querySelector('span');
+    const text = textElement.innerHTML.trim();
+
+    const plainText = text
+    .replace(/<br><br>/g, '\n\n') // แปลง <br><br> เป็น \n\n
+    .replace(/<br>/g, '\n');      // แปลง <br> เป็น \n
+    navigator.clipboard.writeText(plainText).then(() => {
+        // แสดงข้อความ "คัดลอกแล้ว!" ชั่วคราว
+        const message = element.querySelector('.copy-message');
+        if (message) {
+            message.classList.remove('hidden');
+            message.classList.add('visible');
+
+            setTimeout(() => {
+                message.classList.remove('visible');
+                message.classList.add('hidden');
+            }, 1500);
+        }
+    }).catch(err => {
+        console.error("Error copying text: ", err);
+        alert("ไม่สามารถคัดลอกข้อความได้");
+    });
+}
+    </script>
+</body>
+</html>
+
+

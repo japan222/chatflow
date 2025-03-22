@@ -1,0 +1,175 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    background-color: #ffffff;
+    color: #333;
+    overflow-y: scroll;
+    margin: -5px;
+    padding: -5px;
+}
+
+.container {
+    max-width: 1800px;
+    margin: 10px;
+    padding: 5px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    border-radius: 8px;
+    padding-top: 240px;
+}
+
+p {
+    text-align: center;
+    font-size: 13px;
+    margin: 5px;
+    margin-bottom: 5px;
+    user-select: none;
+}
+
+.button-group1 {
+    position: fixed;
+    top: 0;
+    left: 5px;
+    right: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    background: #fff;
+}
+
+.button-group1 button {
+    flex: 1 auto;
+    width: 100px;
+    min-width: 50px;
+    max-width: 150px;
+    height: 70px ;
+    padding: 10px;
+    font-size: 14px auto;
+    text-align: center;
+    border: none;
+    border-radius: 12px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background 1s;
+}
+
+
+.button-group1 button:hover {
+    background: #0056b3;
+}
+
+.button-group2 {
+    position: fixed;
+    top: 80px; /* หากต้องการให้อยู่ด้านบนของ viewport */
+    left: 5px;
+    right: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    background: #fff; /* กำหนดพื้นหลังเพื่อความชัดเจน */
+}
+
+.button-group2 button {
+    flex: 1 auto; /* ทำให้ปุ่มมีขนาดเท่ากัน */
+    width: 100px; /* จำกัดความกว้างสูงสุด */
+    min-width: 30px; /* จำกัดความกว้างต่ำสุด */
+    max-width: 150px; /* จำกัดความกว้างสูงสุด */
+    height: 70px ;
+    padding: 10px; /* เพิ่มพื้นที่ในปุ่ม */
+    font-size: 14px auto; /* ขนาดตัวอักษร */
+    text-align: center;
+    border: none;
+    border-radius: 12px;
+    background: #0ab821;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: background 1s;
+}
+
+
+.button-group2 button:hover {
+    background: #067915;
+}
+
+/* Button Group 3 */
+.button-group3 {
+    position: fixed;
+    top: 160px; /* ระบุหน่วยเป็น px */
+    left: 5px;
+    right: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    background: #fff;
+}
+
+.button-group3 button {
+    flex: 1 auto; /* ทำให้ปุ่มมีขนาดเท่ากัน */
+    width: 100px; /* จำกัดความกว้างสูงสุด */
+    min-width: 30px; /* จำกัดความกว้างต่ำสุด */
+    max-width: 150px; /* จำกัดความกว้างสูงสุด */
+    height: 70px ;
+    padding: 10px; /* เพิ่มพื้นที่ในปุ่ม */
+    font-size: 14px auto; /* ขนาดตัวอักษร */
+    text-align: center;
+    border: none;
+    border-radius: 12px;
+    background: #d40b47;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: background 1s;
+}
+
+
+.button-group3 button:hover {
+    background: #720326;
+}
+
+.response-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fdfdfd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.response-item span {
+    flex: 1 ;
+    font-size: 17px ;
+    color: #333;
+}
+
+.response-item div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.copy-message {
+    font-size: 14px;
+    margin-top: 5px;
+    color: rgb(22, 122, 22);
+    display: none;
+}
+
+.copy-message.visible {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
